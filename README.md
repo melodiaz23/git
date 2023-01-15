@@ -93,6 +93,10 @@ Working directory/Tree: All the commits inside the working directory are stored 
 
 --> Branches are, basically sub folders inside the Git project.
 
+**Commits**
+
+Is bassically a 'snapshot' of our current project. 
+
 ### Installing Git and firts steps
 
 1. [Homebrew](https://brew.sh/index_es)
@@ -287,7 +291,7 @@ In the case we want to restore the version prior:
 
 > Git reset helps us to reset the head of our branch (undo commits).
 
-For example, to go back to the prior version of our last commit:
+For example, to go back to the prior version of our last commit (*"delete"* the last commit):
 
 	git reset --soft HEAD~1
 	//head because is the one that should be reset
@@ -314,13 +318,19 @@ It will remove the commits, the files on the staging area and the file from the 
 
 To delete branches we use -d or -D. Small d will only allow us to delete branches if we merge the branches already. Capital D, will force the deletion.
 
-	git branch -D <File to delete>
+	git branch -D <File to delete> 
+	// -D force the deletion.
 	// or...
 	git branch -d <file to delete>
 
 We can also delete multiple branches with one command, with one space between the name of the files.
 
 	git branch -D <file> <file>
+
+> If we want to create a new branch:
+
+	git switch -c [name of the new branch]
+	// Witch -c it change of branch inmmediatly. 
 
 ## Git stash
 
@@ -367,4 +377,57 @@ To clear the enter stash
 
 	git stash clear
 
-## Git Restore
+## Git reflog
+
+Help us if we if we deleted, a commit or a branch.
+
+If we need to bring back a deleted information:
+
+	git reflog 
+	//This give us an overview of all changes in this branch.
+	//It is a rolling back 30-day storage.
+
+Then 
+
+	git reset --hard 6944f15
+
+reflog also help us with deleted branches.
+
+	git reflog
+	// Then, for branches...
+	git checkout 5f1e8ce
+	git switch -c feature 
+	// create a new branch with the information of that branch.
+
+## Combining master & feature branches
+
+- **Master branch** is basically the main project branch that we have. And is the first branch we create in the project.
+
+- **Feature branch** is a copy of the master branch where we can work on a new feature until it is complete.
+
+### How combine master & feature branch?
+
+#### Merge types
+
+* **Fast forward**: Only works if we have no additional commit in the master branch.
+
+The fast forward merge moves the latest commits on feature to the HEAD. This action does not create new commit. Juts move. 
+
+	git merge [nameofthebranchwewanttomerge]
+
+To **undo the merge**:
+	git reset --hard HEAD~2
+	//Number depends on the numbers of commit we want to go back.
+
+Another way to do it, is with a so-called flag:
+
+	git merge --squash [nameofthebranchwewanttomerge]
+	//It will put together all the commits we had in our feature branch into the latest commit. Only one commit is added.
+	// With this we have to create a separate commit which contains all these changes.
+
+
+* Non fast forward
+  * **Recursive**
+  * Octopus
+  * Ours
+  * Subtree
