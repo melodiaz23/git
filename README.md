@@ -51,17 +51,17 @@ Shell -> Text input interface
 Cd /Users -> Users directory
 Cd + ‘tab twice’ -> Show carpets with similar names
 ~ -> Indicates that we are currently in the directory ‘melidiaz’
-Mkdir -> Make directory (create new folder)
+**Mkdir** -> Make directory (create new folder)
 Touch -> Make files (touch existing files and simply change the date when the file was change de last time but if can’t finde a specific file, create a new one)
-Rm -> Delete a file permanently
-Rmdir -> Delete the directory (only if it is empty)
-Rm -r -> Remove folder that contains data.
--s -> a Flag (add additional information to our command) to see the file size
--l -> Long format to get additional information about the data. 
+**rm** -> Delete a file permanently
+**rmdir** -> Delete the directory (only if it is empty)
+**rm -r** -> Remove folder that contains data.
+**-s** -> a Flag (add additional information to our command) to see the file size
+**-l** -> Long format to get additional information about the data. 
 Man + ‘command’ -> Manual to get access to the manual of that command
-Cp -> Copy
-Cp -r -> Copies the entire data (r for recursive)
-Mv -> Move (We can’t move the entire data, but we can move folders). With move, also we can rename a file. e.g. ‘mv style.css style.css’
+**cp** -> Copy (cp and the relative path)
+**cp -r** -> Copies the entire data (r for recursive) - cp -r data/ copied/ (the slash is important here)
+**mv** -> Move (We can’t move the entire data, but we can move folders). With move, also we can rename a file. e.g. ‘mv style.css style.css’
 
 **_Relative and absolute paths_** 
 
