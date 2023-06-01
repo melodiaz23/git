@@ -272,13 +272,15 @@ If we have and untracked file we want to get rid of:
 
 Once we add the files to the stage area... if we want to undo that changes, we need to bring back the latest commit, tha latest stage of the file, and copy into the staging area: 
 
+	git checkout [name of the file] and them:
+
 	git reset [name of the file] 
 	// remove flie(s) from staging area
 	// Copy the latest committed change of a file into the staging area
-	//then we must to use checkout.
+	//then we must to use checkout again.
 	git checkout [name of the file]
 
-Another option is with restore command. It help us to restore and earlier stage of the project.
+Another option is with **restore command**. It help us to restore and earlier stage of the project.
 In the case we want to restore the version prior:
 
 	git restore --staged [name of the file] 
@@ -431,3 +433,7 @@ Another way to do it, is with a so-called flag:
   * Octopus
   * Ours
   * Subtree
+
+	git merge --no-ff [name of the branch]
+	// Recursive strategy
+	// We can also use this recursive merging strategy in cases where our fast-forward merge all the works.
