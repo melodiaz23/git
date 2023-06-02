@@ -437,3 +437,17 @@ Another way to do it, is with a so-called flag:
 	git merge --no-ff [name of the branch]
 	// Recursive strategy
 	// We can also use this recursive merging strategy in cases where our fast-forward merge all the works.
+
+
+
+	git tag
+
+remove:
+
+	git tag -d [name of the tag]
+
+adding a tag of the last commit
+
+	git tag -a [number of the version] -m '[message]' // Anotated tag
+
+
