@@ -450,4 +450,65 @@ adding a tag of the last commit
 
 	git tag -a [number of the version] -m '[message]' // Anotated tag
 
+**rebase**
 
+**merging conflict**
+
+  git merge --abort
+  git log --merge
+  git diff
+  
+**cherry-pick**
+  git cherry-pick ['id commit']
+
+**git tag**
+- Lightwight tag 
+- Annoated tag
+
+In git: 
+  git tag
+  git tag 1.0 [id of the commit]
+  git show [number of the tag]
+
+
+
+## GitHub
+
+	git remote // show remote servers
+	git remote show origin // show detailed configuration
+
+To conect git with GitHub:
+
+	git remote add origin URL
+
+	to view the branches: 
+	git branch -a // list local and remote tracking branches
+	git branch -r // show remote tracking branches
+	git branch
+	git branch -vv // more details abou the branches
+
+or to watch the branches create on the remote repository: 
+	git branch -a
+
+To push or pull the data
+	git push origin master
+	git pull origin master // git fetch origin master
+
+	git push origin feature[name of the branch] // to create a new branch to a remote repository
+
+If we want to update our latest state without merging anything into our existing structure: 
+	git fetch origin
+	git pull origin master[specifyc branch]
+
+### Branch types
+
+- Local branch
+- Remote branch
+- Tracking branch: Exchanging informtation between or local and the remote branch
+	- remote tracking branch: local copy of the remote branch (git fetch)
+	- local tracking branch: local reference to remote tracking branch (git push, pull, and fetch available)
+
+to **create a local tracking branch**:
+	git branch --track feature-remote[branch name that should be the same as the tracking branch] origin/feature-remote[name of the remote tracking branch]
+
+### Clone a repository
