@@ -13,7 +13,7 @@ function App() {
   }
 
   function hideCartHandler(){
-    setCartIsShown(true)
+    setCartIsShown(false);
   }
 
   return (
