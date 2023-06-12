@@ -334,6 +334,10 @@ We can also delete multiple branches with one command, with one space between th
 	git switch -c [name of the new branch]
 	// Witch -c it change of branch inmmediatly. 
 
+Change the name of the branch
+
+	git branch -m master main
+
 ## Git stash
 
 Stash is like a internal memory, where we can save uncommitted unstaged changes.
@@ -438,8 +442,6 @@ Another way to do it, is with a so-called flag:
 	// Recursive strategy
 	// We can also use this recursive merging strategy in cases where our fast-forward merge all the works.
 
-
-
 	git tag
 
 remove:
@@ -535,4 +537,45 @@ git clone [url]
 
 	git push -u origin feature-upstream
 	// The -u will create a local tracking branch 
+
+**In case of a contribution:**
+
+fork, then clone, do the changes, create a commit, push into our repository and them make the pull request.
+
+# New project usefull commands:
+
+	git config
+
+	git init
+	git add .
+	git commit -m 'message'
+	git branch
+	git branch -m master main // change the name of the branch to 'main'
+	git checkout -b [name of the branch to create]     
+	git branch -a
+
+	git checkout [name of the branch to fetch]
+	git checkout [name of the branch] 
+	// create a local tracking branch
+
+* Create the repository on github and them: 
+	git remote add origin [URL]
+	git push origin main // Push the main repository
+	git push origin [name of the branch to create]
+
+ git push --set-upstream origin // create the branch and push the changes
+
+To clone an existing repository:
+	git clone [URL] . 
+	// To add the project on the folder, without creating a new folder.
+
+
+	git pull
+	//or
+	git pull origin main
+	// pull all the information from github
+
+on main:
+	git merge [name of the branch to merge]
+
 
