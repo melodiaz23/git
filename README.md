@@ -476,10 +476,12 @@ In git:
 
 	git remote // show remote servers
 	git remote show origin // show detailed configuration
+	git ls-remote // to check the remote repository
 
 To conect git with GitHub:
 
-	git remote add origin URL
+	git remote add origin [URL]
+	// To establish the conection between git and github
 
 	to view the branches: 
 	git branch -a // list local and remote tracking branches
@@ -500,7 +502,21 @@ If we want to update our latest state without merging anything into our existing
 	git fetch origin
 	git pull origin master[specifyc branch]
 
-### Branch types
+To delete a remote tracking branch (git branch -a):
+	git branch --delete --remotes origin/feature[name of the tracking branch]
+
+And, to delete a remote branch (git ls-remote):
+	git push origin --delete feature[branch name to delete]
+	// The remote tracking branch also wil be delete it
+
+undo commits:
+	git reset --hard HEAD~1[number of the commits we want to undo]
+	// We delete a commit localy
+	git push origin master
+	git push --force origin master // update the remote branch
+
+
+#### Branch types
 
 - Local branch
 - Remote branch
@@ -511,4 +527,12 @@ If we want to update our latest state without merging anything into our existing
 to **create a local tracking branch**:
 	git branch --track feature-remote[branch name that should be the same as the tracking branch] origin/feature-remote[name of the remote tracking branch]
 
-### Clone a repository
+#### Clone a repository
+
+git clone [url]
+
+#### Upstream
+
+	git push -u origin feature-upstream
+	// The -u will create a local tracking branch 
+
