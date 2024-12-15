@@ -216,10 +216,29 @@ Git **tracks changes** rather than storing entire files repeatedly. It compares 
 
 - A **commit** is essentially a 'snapshot' of the current state of the project at a specific point in time.
 
----
+### Commit, Tree, and Blob
+
+#### **Commit**
+A **commit** represents a snapshot of the repository at a specific point in time, including:
+- A reference to the **tree** object (directory structure).
+- A list of **blobs** (file contents).
+- Author information, a **commit message**, and a reference to the parent commit(s).
+
+#### **Blobs**
+
+**Blob** files (binary large objects) store the content of files in a Git repository. Each blob:
+- Represents the raw content of a file.
+- Is identified by a unique **SHA-1 hash** based on the file's content.
+
+#### **Tree**
+
+A **tree** object represents the directory structure at a given commit. It:
+
+- Contains pointers to **trees** (subdirectories) or **blobs** (files).
+
 ### Installing Git and First Steps
 
-1. Install [Homebrew](https://brew.sh/index_es) 
+1. Install [Homebrew](https://brew.sh/) 
 2. Install Git:
     
     ```shell
