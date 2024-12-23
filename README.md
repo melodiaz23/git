@@ -389,7 +389,7 @@ To check wich files are currently part of our staging area:
 
 ```sh
 git ls-files
-//List data in staging area
+# List data in staging area
 
 ```
 
@@ -410,16 +410,16 @@ Once is deleted, we can commit the change.
 
 To go back to the status of the latest commit (to undo a change, not stage for the commmit - unstaged changes):
 
-```
+```Sh
 git checkout [name of the file we want to refer to the head/latest commit]
-//Or if we have some files and we want to go back to the head status of all commits on the currrent branch
-git checkout . //go back to all
+# Or if we have some files and we want to go back to the head status of all commits on the currrent branch
+git checkout . # go back to all
 
 ```
 
 Another option, with a new command from Git is:
 
-```
+```Shell
 git restore [name of the file or dot .]
 
 ```
@@ -428,7 +428,7 @@ git restore [name of the file or dot .]
 
 If we have and untracked file we want to get rid of:
 
-```
+```Shell
 git clean -dn  // D for delete and We add n to list all the entries we'll to delete
 // this help us to see what we're going to delete before...and then:
 git clean -df // F stand for force. Force git to really do it without asking.
@@ -439,20 +439,20 @@ git clean -df // F stand for force. Force git to really do it without asking.
 
 Once we add the files to the stage area... if we want to undo that changes, we need to bring back the latest commit, tha latest stage of the file, and copy into the staging area:
 
-```
-git checkout [name of the file] and them:
-
+```Sh
+git checkout [name of the file] 
+# and them:
 git reset [name of the file]
-// remove flie(s) from staging area
-// Copy the latest committed change of a file into the staging area
-//then we must to use checkout again.
+# remove flie(s) from staging area
+# Copy the latest committed change of a file into the staging area
+# then we must to use checkout again.
 git checkout [name of the file]
 
 ```
 
 Another option is with **restore command**. It help us to restore and earlier stage of the project. In the case we want to restore the version prior:
 
-```
+```Sh
 git restore --staged [name of the file]
 // Restore is more explicit than reset.
 // Also remove file(s) from staging area
@@ -467,10 +467,10 @@ git checkout [name of the file]
 
 For example, to go back to the prior version of our last commit (_"delete"_ the last commit):
 
-```
+```Sh
 git reset --soft HEAD~1
-//head because is the one that should be reset
-// and ~1 according of the steps you want to go back.
+# head because is the one that should be reset
+# and ~1 according of the steps you want to go back.
 
 ```
 
@@ -478,43 +478,40 @@ With this, the commit is remove, the file is still in the working directory and 
 
 Another way is:
 
-```
-git reset HEAD~1 //The default way
-
+```Sh
+git reset HEAD~1 # The default way
 ```
 
 That way, the file it will remove from the commit and the staging area. It will still remain on the working directory.
 
 The hard way to reset the commits are:
 
-```
+```Sh
 git reset --hard HEAD~1
-
 ```
 
 It will remove the commits, the files on the staging area and the file from the working directory.
 
 ### Branches
 
-```
+```Sh
 git branch
-// To check the branches we have.
-
+# To check the branches we have.
 ```
 
 To delete branches we use -d or -D. Small d will only allow us to delete branches if we merge the branches already. Capital D, will force the deletion.
 
-```
+```Sh
 git branch -D <File to delete>
-// -D force the deletion.
-// or...
+# -D force the deletion.
+# or...
 git branch -d <file to delete>
 
 ```
 
 We can also delete multiple branches with one command, with one space between the name of the files.
 
-```
+```Sh
 git branch -D <file> <file>
 
 ```
@@ -534,173 +531,269 @@ git branch -m master main
 
 ```
 
-## Git stash
+## Git Stash
 
-Stash is like a internal memory, where we can save uncommitted unstaged changes.
+The Git stash is a temporary storage area (like internal memory) where we  can save uncommitted and unstaged changes without committing them to our branch. This is useful when we want to switch branches or work on something else without losing our progress.
+### Common Git Stash Commands
 
-```
-git stash // To get back in our **latest** commit
-
-git stash apply
-// To get back to our unstage change.
-
-git stash list // To get an overview of all our stash changes.
-// stash@{0} is allways the latest.
-
-git stash apply 1
-// The number depends on what data stash we want to access.
-
+1. **Save Changes to Stash**:
+   ```bash
+   git stash
 ```
 
-If we access to some of this unstage data, we need to do something: stash it again, add the changes and commit these.
+- This stashes our current changes and reverts our working directory to the latest commit.
 
-If we want, stash the changes, again:
+2. **List All Stashes**:
+    
+    ```bash
+    git stash list
+    ```
+    - Displays an overview of all stashed changes.
+    - Example entry: `stash@{0}` (the latest stash).
 
-```
-git stash // In this case, with git stash, to come back
-// now we will have a new file added to the working directory.
+3. **Apply a Stash**:
+    
+    ```bash
+    git stash apply [index]
+    ```
+    
+    - Applies changes from the stash to our working directory without removing them from the stash.
 
-```
+- Example:
+	
+	```bash
+	git stash apply 1
+	```
+	
+	(Accesses the second stash in the list.)
+	
+4. **Pop a Stash**:
+    
+    ```bash
+    git stash pop [index]
+    ```
+    
+    - Applies the changes from the stash and removes them from the stash list.
+    - Example:
+        
+        ```bash
+        git stash pop 0
+        ```
+        
+    
+    **Difference between `apply` and `pop`**:
+    - `apply`: Leaves the stash intact.
+    - `pop`: Removes the stash after applying it.
 
-To add messages to our stashes:
 
-```
-git stash push m- "Message we want to let"
-// m- for message.
+5. **Add a Message to a Stash**:
+    
+    ```bash
+    git stash push -m "Message describing the stash"
+    ```
+- Helps to document the purpose of the stashed changes.
 
-```
+6. **Delete Individual Stash Entries**:
 
-To add one of the files to the project:
+    ```bash
+    git stash drop [index]
+    ```
+    
+    - Deletes a specific stash by index.
+- Example:
+	```bash
+	git stash drop 0
+	```
 
-```
-git stash pop 0
-//The number depends on the index nunber we want to add to our project.
-// This just means that we want to add this staged commit to our project
-// and remove it from the stash.
+7. **Clear All Stashes**:
+    
+    ```bash
+    git stash clear
+    ```
+    
+    - Removes all stashes from the stash list.
 
-```
-
-We could also use git stash apply. With that, the data would still remain in the stash. With stash pop, the data is deleted from the stash and apply to the project.
-
-To delete individual entries:
-
-```
-git stash drop 0
-// Number according to the index number.
-
-```
-
-To clear the enter stash
-
-```
-git stash clear
-
-```
-
+### Notes on Stash Usage
+- After retrieving changes from a stash, we may need to either stash them again or stage and commit them.
+- If we stash changes again after applying or popping a stash, a new stash entry will be created.
+- Stashing individual files is not directly supported but can be achieved by staging some files and stashing the rest:
+    
+    ```bash
+    git stash push [file_name]
+    ```
+    
 ## Git reflog
 
 Help us if we if we deleted, a commit or a branch.
 
 If we need to bring back a deleted information:
 
-```
+```Sh
 git reflog
-//This give us an overview of all changes in this branch.
-//It is a rolling back 30-day storage.
+# This give us an overview of all changes in this branch.
+# It is a rolling back 30-day storage.
 
 ```
 
 Then
 
-```
+```Sh
 git reset --hard 6944f15
-
 ```
 
 reflog also help us with deleted branches.
 
-```
+``` Sh
 git reflog
-// Then, for branches...
+# Then, for branches...
 git checkout 5f1e8ce
 git switch -c feature
-// create a new branch with the information of that branch.
+# create a new branch with the information of that branch.
 
 ```
 
-## Combining master & feature branches
+### How to Combine Master & Feature Branch
 
-- **Master branch** is basically the main project branch that we have. And is the first branch we create in the project.
-- **Feature branch** is a copy of the master branch where we can work on a new feature until it is complete.
+#### Merge Types
 
-### How combine master & feature branch?
-
-### Merge types
-
-- **Fast forward**: Only works if we have no additional commit in the master branch.
-
-The fast forward merge moves the latest commits on feature to the HEAD. This action does not create new commit. Juts move.
-
-```
-git merge [nameofthebranchwewanttomerge]
-
+- **Fast Forward**: 
+  - Works only if there are no additional commits in the master branch since the feature branch diverged.
+  - This type of merge moves the latest commits from the feature branch to the HEAD of the master branch without creating a new merge commit.
+  
+  ```bash
+  git merge [name_of_the_branch_we_want_to_merge]
 ```
 
-To **undo the merge**: git reset --hard HEAD~2 //Number depends on the numbers of commit we want to go back.
-
-Another way to do it, is with a so-called flag:
-
-```
-git merge --squash [nameofthebranchwewanttomerge]
-//It will put together all the commits we had in our feature branch into the latest commit. Only one commit is added.
-// With this we have to create a separate commit which contains all these changes.
-
-```
-
-- Non fast forward
-    - **Recursive**
+- **Undoing the Merge**: To undo the merge, use the following command:
+    
+    ```bash
+    git reset --hard HEAD~2
+    ```
+> The number `2` is based on how many commits we want to go back.
+    
+- **Squash Merge**: Squashing combines all the commits from the feature branch into a single commit. You have to create a separate commit that contains all the changes.
+    
+    ```bash
+    git merge --squash [name_of_the_branch_we_want_to_merge]
+    ```
+    
+- **Non-Fast Forward Merges**:
+    
+    - These merges are used when fast-forward is not possible. Common strategies include:
         
-    - Octopus
+        - **Recursive**: The default merge strategy.
+        - **Octopus**: For merging more than two branches.
+        - **Ours**: Uses the current branch’s content and discards changes from the other branch.
+        - **Subtree**: Merges a subtree from another repository.
         
-    - Ours
+        To force a non-fast forward merge, use:
         
-    - Subtree
-        
-        git merge --no-ff [name of the branch] // Recursive strategy // We can also use this recursive merging strategy in cases where our fast-forward merge all the works.
-        
-        git tag
-        
-
-remove:
-
-```
-git tag -d [name of the tag]
-
+```bash
+git merge --no-ff [name_of_the_branch]
 ```
 
-adding a tag of the last commit
+#### Tags
 
+- **Removing a Tag**: To delete a tag locally:
+    
+    ```bash
+    git tag -d [name_of_the_tag]
+    ```
+    
+- **Adding a Tag**: To create an annotated tag for the latest commit:
+    
+    ```bash
+    git tag -a [version_number] -m "[message]"
+    ```
+    
+    To tag a specific commit:
+    
+    ```bash
+    git tag -a [version_number] [commit_id] -m "[message]"
+    ```
+    
+#### Rebase
+
+- **Rebasing** allows you to apply commits from one branch onto another branch, which can create a cleaner history. 
+- Is "changing the base".
+
+```bash
+git rebase
 ```
-git tag -a [number of the version] -m '[message]' // Anotated tag
 
+#### Merge Conflicts
+
+- To abort a merge and revert to the previous state:
+    
+    ```bash
+    git merge --abort
+    ```
+    
+- You can use `git log --merge` to view merge conflicts and `git diff` to check the differences causing conflicts.
+    
+
+#### Cherry-Pick
+
+- **Cherry-pick** allows you to apply a specific commit from another branch onto your current branch:
+    
+    ```bash
+    git cherry-pick [commit_id]
+    ```
+    
+#### Tags in Git
+
+Git tags are used to mark specific points in your repository's history, often to indicate versions or milestones.
+
+- **Lightweight Tag**: 
+  - A simple pointer to a specific commit.
+  - Does not contain additional metadata.
+
+- **Annotated Tag**: 
+  - Stores metadata such as the author, date, and a message.
+  - Useful for tagging releases with detailed information.
+
+##### Common Commands for Git Tags:
+
+1. **View a Tag**:
+   ```bash
+   git show [tag_name]
 ```
 
-**rebase**
-
-**merging conflict**
-
-git merge --abort 
-git log --merge 
-git diff
-
-**cherry-pick** git cherry-pick ['id commit']
-
-**git tag**
-
-- Lightwight tag
-- Annoated tag
-
-In git: git tag git tag 1.0 [id of the commit] git show [number of the tag]
+2. **Create a Lightweight Tag**:
+    
+    ```bash
+    git tag [tag_name] [commit_id]
+    ```
+    
+    Example:
+    
+    ```bash
+    git tag ver1
+    ```
+    
+3. **View All Tags**:
+    
+    ```bash
+    git tag --list
+    ```
+    
+4. **Push Tags to Remote**:
+    
+    ```bash
+    git push --tags
+    ```
+    
+5. **Check Out a Tag**: Tags are not branches, so checking out a tag places your repository in a "detached HEAD" state:
+    
+    ```bash
+    git checkout [tag_name]
+    ```
+    
+    Example:
+    
+    ```bash
+    git checkout ver1
+    ```
 
 ## GitHub
 
@@ -848,7 +941,7 @@ git commit -m 'message'  # Commit changes with a message
 
 ### Branching
 
-```bash
+```Sh
 git branch            # List all branches
 git branch -m master main  # Rename the branch from 'master' to 'main'
 git checkout -b [branch-name]  # Create and switch to a new branch
@@ -901,3 +994,8 @@ To merge a branch into the `main` branch:
 ```bash
 git merge [branch-name]  # Merge the specified branch into the current branch
 ```
+
+***
+# Resources
+
+- [Pro Git Book by Git-SCM](https://git-scm.com/book/en/v2)  
